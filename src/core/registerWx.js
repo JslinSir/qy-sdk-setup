@@ -3,10 +3,8 @@ import { randomString, createTimestamp, checkFunction } from "../utils/index";
 import { initSdk } from "./initSdk";
 
 class RegisterWx {
-  // TODO:
   constructor(props) {
     const { wxConfig } = props || {};
-    console.log("wxConfig:", wxConfig);
     this.wxConfig = wxConfig;
     this.init();
   }
@@ -22,6 +20,7 @@ class RegisterWx {
     const { sdkSrc } = this.wxConfig;
     await initSdk(sdkSrc);
     this.setWxConfig();
+    this.logger('----🚚🚚🚚 jssdk 导入页面成功 ----')
     return {
       message: "jssdk init ok",
       wxConfig: this.wxConfig,
@@ -50,21 +49,28 @@ class RegisterWx {
     });
 
     wx.ready((res) => {
+      this.logger('---- ✅ wx.ready 装载成功：可配置 wxConfig 的 wxReadyCallBack 处理回调 ✅----')
       checkFunction(wxReadyCallBack) && wxReadyCallBack(res);
     });
 
     wx.error((err) => {
+      this.logger('error','----😭 触发了 wx.error：可配置 wxConfig 的 wxFailCallBack 处理报错回调 😭----')
       checkFunction(wxFailCallBack) && wxFailCallBack(err);
     });
   }
 
   register() {
+    this.logger('---- 执行 register ----')
     this.setWxConfig()
+  }
+
+  logger(){
+    const [type,message] = arguments.length === 1 ? ['log', arguments[0]] :  [arguments[0],arguments[1]]
+    this.wxConfig.debug && console[type](message)
   }
 }
 
 function _getInstance(props) {
-  console.log("props:", props);
   return RegisterWx.getInstance(props);
 }
 
