@@ -11,6 +11,6 @@ const wxSDK = new RegisterWx({
 })
 
 // 页面用到的时候去注册
-wxSDK.register()
+// wxSDK.register()
 
  
