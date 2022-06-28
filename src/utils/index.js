@@ -71,3 +71,12 @@ export const randomString = (length = 10) => {
 export const createTimestamp = ()=> {
     return Math.floor(new Date().getTime() / 1000)
 }
+
+/**
+ * 检查是否是一个函数
+ * @param {*} fn 
+ * @returns 
+ */
+export const checkFunction = (fn)=> {
+    return  typeof fn === 'function'
+}

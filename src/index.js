@@ -2,7 +2,7 @@ import RegisterWx from './core/registerWx'
 
 
 
-const wxOj = new RegisterWx({
+const wxSDK = new RegisterWx({
     wxConfig:{
         appId:'123',
         name:'lalalla'
@@ -10,6 +10,7 @@ const wxOj = new RegisterWx({
   
 })
 
-wxOj.register()
+// 页面用到的时候去注册
+wxSDK.register()
 
  
